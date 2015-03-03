@@ -1,17 +1,24 @@
-package com.yagonightlife.yago;
+package com.yagonightlife.yago.login;
 
-import android.support.v7.app.ActionBarActivity;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.yagonightlife.yago.R;
 
-public class LoginActivity extends ActionBarActivity {
+
+public class LoginActivity extends FragmentActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        loadFragment(new AgeFragment());
     }
 
 
@@ -36,4 +43,13 @@ public class LoginActivity extends ActionBarActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+    public void loadFragment(Fragment newFragment) {
+        FragmentManager fm = getSupportFragmentManager();
+        FragmentTransaction transaction = fm.beginTransaction();
+        transaction.replace(R.id.login_activity_container, newFragment);
+        transaction.addToBackStack("Login Activity");
+        transaction.commit();
+    }
+
 }
